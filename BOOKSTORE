@@ -1,0 +1,42 @@
+To create Books
+Create Database Books;
+Use Books;
+CREATE TABLE Books (
+   BookID INT PRIMARY KEY,
+    Title  VARCHAR(100) NOT NULL,
+    Author VARCHAR(50) NOT NULL,
+    ISBN   VARCHAR(20) UNIQUE,
+    Price DECIMAL(8,2) CHECK (Price > 0)
+    );
+    Use Books;
+    CREATE TABLE Orders (
+       OrderID INT PRIMARY KEY,
+       BookID INT,
+       OrderDate DATE NOT NULL,
+       Quantity INT CHECK (Quantity > 0),
+       FOREIGN KEY (BookID) REFERENCES BOOKS(BOOKID)
+       );
+       Use Books;
+       ALTER TABLE Books;
+       ADD CONSTRAINT UQ_BOOKS_ISBN UNIQUE (ISBN);
+       SHOW CREATE TABLE Books;
+       
+       INSERT INTO Books (BookID, Title, Author,ISBN, Price)
+       VALUES
+       (1, 'The Great Gatsby ', 'F. Scott Fitzgerald', '9780743273565', 299.99),
+       (2, 'To Kill a Mockingbird', 'Harper Lee', '9780061120084', 399.50),
+       (3, '1984', 'George Orwell', '9780451524935', 249.00),
+       (4, 'Pride and Prejudice', 'Jane Austen', '9780141439518', 199.75),
+       (5, 'The Catcher in the Rye', 'J.D. Salinger', '9780316769488', 350.00);
+       
+       SELECT * FROM Books;
+       UPDATE Books
+       SET Price = 275.00
+       WHERE BookID = 3;
+       
+       UPDATE Orders
+       SET Quantity =3
+       WHERE OrderID =1;
+       
+       SELECT * FROM Books WHERE BookID =3;
+       SELECT * FROM Orders WHERE OrderID =1;
